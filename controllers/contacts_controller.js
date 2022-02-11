@@ -1,5 +1,7 @@
 import Contact from "../models/contact_model.js";
 
+import mongoose from "mongoose";
+
 export const getContacts = async (req, res) => {
   try {
     const contacts = await Contact.find();
@@ -18,4 +20,35 @@ export const createContact = async (req, res) => {
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
+};
+
+export const updateContact = async (req, res) => {
+  const { id: _id } = req.params;
+  const contact = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send("No post with that id");
+  }
+
+  const updatedContact = await Contact.findByIdAndUpdate(
+    _id,
+    { ...contact, _id, approved: true },
+    {
+      new: true,
+    }
+  );
+
+  res.json(updatedContact);
+};
+
+export const deleteContact = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send("No post with that id");
+  }
+
+  await Contact.findByIdAndRemove(id);
+
+  res.json({ message: "contact deleted successfully" });
 };

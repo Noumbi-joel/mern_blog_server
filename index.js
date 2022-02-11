@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import contactRoutes from "./routes/contact_routes.js";
+import authRoutes from "./routes/auth_routes.js";
+import profileRoutes from "./routes/profile_routes.js";
 
 const app = express();
 dotenv.config();
@@ -14,6 +16,8 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+app.use("/profile", profileRoutes);
+app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
 app.use("/", (req, res) => {
