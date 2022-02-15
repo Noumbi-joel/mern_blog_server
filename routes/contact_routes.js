@@ -8,11 +8,13 @@ import {
   deleteContact,
 } from "../controllers/contacts_controller.js";
 
+import auth from "../middlewares/auth_middleware.js";
+
 const router = express.Router();
 
-router.get("/", getContacts);
-router.post("/", createContact);
-router.patch("/:id", updateContact);
-router.delete("/:id", deleteContact);
+router.get("/", auth, getContacts);
+router.post("/", auth, createContact);
+router.patch("/:id", auth, updateContact);
+router.delete("/:id", auth, deleteContact);
 
 export default router;

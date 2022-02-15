@@ -5,10 +5,6 @@ const contactSchema = mongoose.Schema({
     type: String,
     default: new Date().getTime().toString(),
   },
-  idAdmin: {
-    type: String,
-    default: new Date().getDate().toString(),
-  },
   name: String,
   email: String,
   message: String,
