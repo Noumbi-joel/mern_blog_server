@@ -6,6 +6,15 @@ export const getProfile = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send("No user with that id");
   }
+  
+  if (!req.userId) {
+    return res.status(401).json({ message: "UNAUTHENTICATED" });
+  }
+
+  if(!id){
+    
+  }
+
   const user = await User.findById(id);
   res.status(200).json(user);
 };
@@ -17,6 +26,11 @@ export const updateProfile = async(req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send("No post with that id");
   }
+
+  if (!req.userId) {
+    return res.status(401).json({ message: "UNAUTHENTICATED" });
+  }
+
   const updateProfile = await User.findByIdAndUpdate(
     _id,
     { ...profile, _id },

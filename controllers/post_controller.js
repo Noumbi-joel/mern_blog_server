@@ -3,9 +3,6 @@ import mongoose from "mongoose";
 
 export const getPosts = async (req, res) => {
   try {
-    if (req.role === !process.env.ADMIN) {
-      return res.status(401).json({ message: "UNAUTHORIZED" });
-    }
     const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {
@@ -17,8 +14,8 @@ export const addPost = async (req, res) => {
   const post = req.body;
   const newPost = new Post(post);
   try {
-    if (req.role === !process.env.ADMIN) {
-      return res.status(401).json({ message: "UNAUTHORIZED" });
+    if (req.userId && req.role !== process.env.ROLE) {
+      return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
     }
     await newPost.save();
     res.status(201).json(newPost);
@@ -35,8 +32,8 @@ export const updatePost = async (req, res) => {
     return res.status(404).send("No post with that id");
   }
 
-  if (req.role === !process.env.ADMIN) {
-    return res.status(401).json({ message: "UNAUTHORIZED" });
+  if (req.userId && req.role !== process.env.ROLE) {
+    return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
   }
 
   const updatedPost = await Post.findByIdAndUpdate(
@@ -57,8 +54,8 @@ export const deletePost = async (req, res) => {
     return res.status(404).send("No post with that id");
   }
 
-  if (req.role === !process.env.ADMIN) {
-    return res.status(401).json({ message: "UNAUTHORIZED" });
+  if (req.userId && req.role !== process.env.ROLE) {
+    return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
   }
 
   await Post.findByIdAndRemove(id);

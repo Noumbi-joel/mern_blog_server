@@ -6,7 +6,10 @@ const userSchema = mongoose.Schema({
   email: String,
   imageUrl: String,
   password: String,
-  role: String,
+  role: {
+    type: String,
+    default: 'USER',
+  },
   createdAt: {
     type: Date,
     default: new Date(),

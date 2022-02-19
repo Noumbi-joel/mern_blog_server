@@ -23,8 +23,8 @@ export const signin = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { email: existingUser.email, id: existingUser._id },
-      process.env.SECRET_JWT,
+      { email: existingUser.email, id: existingUser._id, role: existingUser.role },
+      process.env.SECRET,
       {
         expiresIn: "1h",
       }
@@ -69,12 +69,14 @@ export const signup = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { email: newUser.email, id: newUser._id },
-      process.env.SECRET_JWT,
+      { email: newUser.email, id: newUser._id, role },
+      process.env.SECRET,
       {
         expiresIn: "1h",
       }
     );
+
+    await newUser.save()
 
     res.status(200).json({ result: newUser, token });
     

@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 
 export const getContacts = async (req, res) => {
   try {
-    if (req.role === !process.env.ADMIN) {
-      return res.status(401).json({ message: "UNAUTHORIZED" });
+    if (req.userId && req.role !== process.env.ROLE) {
+      return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
     }
     const contacts = await Contact.find();
     res.status(200).json(contacts);
@@ -18,9 +18,6 @@ export const createContact = async (req, res) => {
   const contact = req.body;
   const newContact = new Contact(contact);
   try {
-    if (!req.userId) {
-      return res.status(401).json({ message: "unauthenticated" });
-    }
     await newContact.save();
     res.status(201).json(newContact);
   } catch (err) {
@@ -36,8 +33,8 @@ export const updateContact = async (req, res) => {
     return res.status(404).send("No contact with that id");
   }
 
-  if (req.role === !process.env.ADMIN) {
-    return res.status(401).json({ message: "UNAUTHORIZED" });
+  if (req.userId && req.role !== process.env.ROLE) {
+    return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
   }
 
   const updatedContact = await Contact.findByIdAndUpdate(
@@ -58,8 +55,8 @@ export const deleteContact = async (req, res) => {
     return res.status(404).send("No contact with that id");
   }
 
-  if (req.role === !process.env.ADMIN) {
-    return res.status(401).json({ message: "UNAUTHORIZED" });
+  if (req.userId && req.role !== process.env.ROLE) {
+    return res.status(401).json({ message: "ADMINISTRATOR CAPABILITIES" });
   }
 
   await Contact.findByIdAndRemove(id);

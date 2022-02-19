@@ -13,7 +13,7 @@ import auth from "../middlewares/auth_middleware.js";
 const router = express.Router();
 
 router.get("/", auth, getContacts);
-router.post("/", auth, createContact);
+router.post("/", createContact);
 router.patch("/:id", auth, updateContact);
 router.delete("/:id", auth, deleteContact);
 
