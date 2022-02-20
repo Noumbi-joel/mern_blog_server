@@ -9,6 +9,7 @@ const postSchema = mongoose.Schema({
   paragraph: String,
   imageUrl: String,
   categoryName: String,
+  githubLink: String,
   debutDate: String,
   endDate: String,
   createdAt: {
