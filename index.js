@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-dotenv.config({path: "./config.env"})
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -11,6 +10,7 @@ import profileRoutes from "./routes/profile_routes.js";
 import userRoutes from "./routes/user_routes.js";
 import postRoutes from "./routes/post_routes.js";
 
+dotenv.config({ path: "./config.env" });
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -30,6 +30,11 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true, })
-  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+  .connect(process.env.CONNECT_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+  )
   .catch((e) => console.log(e.message));
