@@ -30,10 +30,13 @@ app.use("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECT_URL.toString(), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://littlejacob:yvessaintlaurent@cluster0.i2vpz.mongodb.net/MyBlog237?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
