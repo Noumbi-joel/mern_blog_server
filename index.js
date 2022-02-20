@@ -1,9 +1,9 @@
+require('dotenv').config();
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
-import dotenv from "dotenv";
 
 import contactRoutes from "./routes/contact_routes.js";
 import authRoutes from "./routes/auth_routes.js";
@@ -11,7 +11,6 @@ import profileRoutes from "./routes/profile_routes.js";
 import userRoutes from "./routes/user_routes.js";
 import postRoutes from "./routes/post_routes.js";
 
-dotenv.config();
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
