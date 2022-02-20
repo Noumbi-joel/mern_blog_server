@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({path: "./config.env"})
+dotenv.config({ path: "./config.env" });
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -30,7 +30,7 @@ app.use("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(String(process.env.CONNECT_URL), {
+  .connect(process.env.CONNECT_URL.toString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
