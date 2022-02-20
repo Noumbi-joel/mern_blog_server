@@ -24,7 +24,7 @@ app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Yo men ! go to /posts to see the data 😁");
+  res.send("Hello world!");
 });
 
 const PORT = process.env.PORT || 5000;
