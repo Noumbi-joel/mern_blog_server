@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+dotenv.config({path: "./config.env"})
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -23,21 +23,13 @@ app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Yo men ! go to /posts to see the data 😁");
 });
 
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(
-    "mongodb+srv://littlejacob:yvessaintlaurent@cluster0.i2vpz.mongodb.net/MyBlog237?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-  )
+  .connect(process.env.CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true, })
+  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
   .catch((e) => console.log(e.message));
