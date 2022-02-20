@@ -1,9 +1,9 @@
-require('dotenv').config();
+import dotenv from "dotenv";
+dotenv.config({path: "./config.env"})
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-
 
 import contactRoutes from "./routes/contact_routes.js";
 import authRoutes from "./routes/auth_routes.js";
