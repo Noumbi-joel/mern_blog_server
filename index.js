@@ -24,7 +24,6 @@ app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
 app.get("/", (req, res) => {
-  console.log(typeof process.env.CONNECT_URL)
   res.send("Hello world men 😁!");
 });
 
