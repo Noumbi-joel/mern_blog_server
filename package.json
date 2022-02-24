@@ -233,8 +233,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../client && npm run build --prefix ../client"
+    "start": "nodemon index.js"
   },
   "engines": {
     "node": "16.14.0",

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from "url";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -16,7 +16,6 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -28,10 +27,9 @@ app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  console.log(path.dirname(__filename))
-  app.use(express.static(path.join(path.dirname(__filename), "../client/build")));
+  app.use(express.static(path.join(path.dirname(__filename), "build")));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(path.dirname(__filename), "../client", "build", "index.html"));
+    res.sendFile(path.join(path.dirname(__filename), "build", "index.html"));
   });
 } else {
   app.get("/", (req, res) => {

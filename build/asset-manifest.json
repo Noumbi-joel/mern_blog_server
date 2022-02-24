@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ef3e8b93.css",
+    "main.js": "/static/js/main.a2617266.js",
+    "static/media/lijay.jpg": "/static/media/lijay.c2bf8d97df1f636dc650.jpg",
+    "static/media/client.jpg": "/static/media/client.6278c5c5306001855de4.jpg",
+    "static/media/leaf-bg.png": "/static/media/leaf-bg.aeaae280e714ba35c729.png",
+    "static/media/education-bg.png": "/static/media/education-bg.270bde0f4d053894fedc.png",
+    "static/media/page-title.png": "/static/media/page-title.85cda66ee51ccf844b94.png",
+    "index.html": "/index.html",
+    "main.ef3e8b93.css.map": "/static/css/main.ef3e8b93.css.map",
+    "main.a2617266.js.map": "/static/js/main.a2617266.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef3e8b93.css",
+    "static/js/main.a2617266.js"
+  ]
+}
