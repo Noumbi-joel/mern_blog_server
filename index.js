@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
+import path from "path";
+import {fileURLToPath} from 'url';
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -12,6 +14,8 @@ import postRoutes from "./routes/post_routes.js";
 
 dotenv.config({ path: "./config.env" });
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -23,9 +27,17 @@ app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/contacts", contactRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello world men 😁!");
-});
+if (process.env.NODE_ENV === "production") {
+  console.log(path.dirname(__filename))
+  app.use(express.static(path.join(path.dirname(__filename), "../client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(path.dirname(__filename), "../client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("Hello world men 😁!");
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 
